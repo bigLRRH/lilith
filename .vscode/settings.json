@@ -1,11 +1,11 @@
 {
     "conventionalCommits.scopes": [
-        "env",
+        "env-backend",
         "vscode",
         "config-backend",
         "dependencies-backend",
         "db",
-        "error",
+        "error-backend",
         "lilith"
     ]
 }
