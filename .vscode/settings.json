@@ -6,6 +6,8 @@
         "dependencies-backend",
         "db",
         "error-backend",
-        "lilith"
+        "lilith",
+        "analysis-backend",
+        "strategy-backend",
     ]
 }
