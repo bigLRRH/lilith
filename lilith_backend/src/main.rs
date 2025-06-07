@@ -1,34 +1,17 @@
+mod analysis;
 mod config;
+mod data;
 mod db;
+mod engine;
 mod error;
 mod routes;
+mod strategy;
+mod types;
 
-use axum::Router;
-use config::Settings;
-use db::create_pool;
-
-#[tokio::main]
-async fn main() -> anyhow::Result<()> {
-    // 初始化日志
-    tracing_subscriber::fmt::init();
-
-    // 加载配置
-    let settings = Settings::new()?;
-
-    // 创建数据库连接池
-    let pool = create_pool(&settings.database_url).await?;
-
-    // 构建路由
-    let app = Router::new().with_state(pool);
-
-    let listener = tokio::net::TcpListener::bind(settings.server_addr)
-        .await
-        .unwrap();
-
-    tracing::info!("Server listening on {}", settings.server_addr);
-
-    // 启动服务器
-    axum::serve(listener, app).await.unwrap();
-
-    Ok(())
+fn main() {
+    let data_provider = data::data_provider::MockDataProvider::new();
+    let stock_reports = engine::executor::run_pipeline(&data_provider);
+    for report in stock_reports {
+        println!("{:?}", report);
+    }
 }
