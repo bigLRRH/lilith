@@ -6,6 +6,7 @@ edition = "2024"
 [dependencies]
 anyhow = "1.0.98"
 axum = "0.8.4"
+chrono = { version = "0.4.41", features = ["serde"] }  # 推荐加 serde，便于序列化
 config = "0.15.11"
 dotenvy = "0.15.7"
 serde = "1.0.219"
