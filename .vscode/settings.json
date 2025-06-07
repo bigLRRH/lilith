@@ -9,5 +9,9 @@
         "lilith",
         "analysis-backend",
         "strategy-backend",
+        "types-backend",
+        "data-backend",
+        "engine-backend",
+        "main-backend"
     ]
 }
