@@ -1,7 +1,7 @@
 use crate::{data::data_provider::DataProvider, strategy, types::stock_report::StockReport};
 
-pub fn run_pipeline(data_provider: &dyn DataProvider) -> Vec<StockReport> {
-    let stocks = data_provider.get_all_stocks();
+pub async fn run_pipeline(data_provider: &dyn DataProvider) -> Vec<StockReport> {
+    let stocks = data_provider.get_all_stocks().await;
     let selected_stocks = strategy::apply_strategy(stocks);
     let stock_reports: Vec<StockReport> = selected_stocks
         .into_iter()
@@ -18,8 +18,8 @@ pub fn run_pipeline(data_provider: &dyn DataProvider) -> Vec<StockReport> {
             stock_created_at: stock.created_at,
             stock_updated_at: stock.updated_at,
             report_date: chrono::Utc::now().date_naive(),
-            report_type: "daily".to_string(), // Example report type
-            report_content: "Sample report content".to_string(), // Placeholder content
+            report_type: "daily".to_string(),
+            report_content: "Sample report content".to_string(),
         })
         .collect();
     stock_reports

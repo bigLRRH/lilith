@@ -1,7 +1,8 @@
 use crate::types::stock::Stock;
 
+#[async_trait::async_trait]
 pub trait DataProvider {
-    fn get_all_stocks(&self) -> Vec<Stock>;
+    async fn get_all_stocks(&self) -> Vec<Stock>;
 }
 
 pub struct MockDataProvider;
@@ -11,8 +12,9 @@ impl MockDataProvider {
     }
 }
 
+#[async_trait::async_trait]
 impl DataProvider for MockDataProvider {
-    fn get_all_stocks(&self) -> Vec<Stock> {
+    async fn get_all_stocks(&self) -> Vec<Stock> {
         vec![
             Stock {
                 id: 1,
